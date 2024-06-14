@@ -15,6 +15,7 @@ public class SearchController : Controller
     public IActionResult Index()
     {
         ViewBag.columns = ListController.ColumnChoices;
+        // ViewBag.selected = searchType;
         return View();
     }
 
@@ -22,19 +23,23 @@ public class SearchController : Controller
     public IActionResult Results(string searchType, string searchTerm)
     {
         // List<Job> jobs = new();
-        if (searchType == "all" && searchTerm == null)
+        if ((searchType == "all" && searchTerm == null) || searchTerm.ToLower() == "all" || searchTerm == null )
         {
             // jobs = JobData.FindAll();
             // ViewBag.jobs = jobs;
             ViewBag.jobs = JobData.FindAll();
+            // ViewBag.selected = searchType;
         }
         else
         {
             // jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
             // ViewBag.jobs = jobs;
+            // ViewBag.selected = searchType;
             ViewBag.jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
         }
         ViewBag.columns = ListController.ColumnChoices;
+        ViewBag.title = searchType + ": " + searchTerm;
+        ViewBag.selected = searchType;
         return View("Index");
     }
 }

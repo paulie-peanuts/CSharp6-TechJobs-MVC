@@ -9,11 +9,11 @@
             @foreach (var column in ViewBag.columns)
             {
                 <span>
-                    <input type="radio" name="searchType" id="@column.Key" value="@column.Key" checked="@column.Key == 'all'" />
+                    <input type="radio" name="searchType" id="@column.Key" value="@column.Key" checked="@(column.Key == ViewBag.selected)" />
                     <label for="@column.Key">@column.Value</label>
                 </span>
             }
-
+                @* <span><input type="radio" name="searchType" value="@ViewBag.selected?" checked="@column.Key=='all"/></span> *@
         </p>
 
         <p>
@@ -51,13 +51,13 @@
     @* Alternate table option: *@
 <div class="container body-content">
 
-    <h1>@ViewBag.title</h1>
+    @* <h1>@ViewBag.title</h1> *@
 
     @if(ViewBag.jobs?.Count > 0)
     {
             @foreach (var job in ViewBag.jobs)
             {
-                <table class="job-listing">
+                <table @*class="job-listing"*@ class="job-listing table table-striped @*table-hover*@">
                     <tr>
                         <th>ID</th>
                         <td>@job.Id</td>
